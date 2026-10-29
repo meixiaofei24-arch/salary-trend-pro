@@ -1,5 +1,217 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="theme-color" content="#111315"/><title>薪资趋势Pro · 城市与岗位薪资观察</title><script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script><style>
-:root{--bg:#111315;--card:#1b1e20;--muted:#9b9da2;--gold:#e8d18d;--green:#89d0a9;--line:#303338}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f2f1ee;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft Yahei',sans-serif}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:640px;margin:auto;min-height:100vh;padding-bottom:85px}.top{padding:25px 20px 15px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:22px;font-weight:750}.brand span{color:var(--gold)}.pill{border:1px solid #494337;color:var(--gold);padding:5px 10px;border-radius:30px;font-size:11px}.search{margin:0 18px 20px;background:#242629;border:0;border-radius:28px;color:white;width:calc(100% - 36px);padding:15px 18px;outline:none}.heading{padding:0 20px}.eyebrow{color:var(--muted);font-size:12px}.heading h1{font-size:29px;margin:10px 0 5px}.notice{margin:14px 18px;padding:11px 13px;background:#28271f;border-left:3px solid var(--gold);font-size:12px;line-height:1.7;color:#ddd2af}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:17px 18px}.stat{padding:17px 14px;background:var(--card);border-radius:12px}.label{font-size:12px;color:var(--muted)}.number{font-size:27px;font-weight:650;color:var(--gold);margin-top:8px}.stat small{font-size:11px;color:#b9b6a9}.section{padding:12px 18px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sectionhead h2{font-size:18px;margin:0}.badge{color:var(--gold);font-size:12px}.chartbox{background:var(--card);border-radius:13px;padding:15px}.chart{height:230px;width:100%}.tabs{display:flex;gap:7px;margin:10px 0 0}.tabs button{background:#2b2d2f;color:#b9b9b9;border:0;padding:7px 14px;border-radius:20px;font-size:12px}.tabs button.active{background:var(--gold);color:#171715}.row{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--line);gap:8px}.row:last-child{border:0}.rank{width:24px;color:var(--gold);font-weight:700}.rowmain{flex:1;min-width:0}.rowmain strong{display:block;font-size:16px}.rowmain small{display:block;color:var(--muted);margin-top:5px;font-size:11px}.rowright{text-align:right}.rowright strong{display:block;color:var(--gold)}.rowright small{color:var(--muted);font-size:11px}.card{background:var(--card);border-radius:13px;padding:7px 15px}.controls{display:flex;gap:8px;margin:12px 0}.controls select{flex:1;min-width:0;background:#292b2d;color:white;border:1px solid #444;border-radius:8px;padding:11px}.cta{border:1px solid var(--gold);color:var(--gold);background:transparent;padding:9px 12px;border-radius:9px}.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:640px;width:100%;display:flex;background:#17191b;border-top:1px solid #333;z-index:10;padding:10px 0 calc(10px + env(safe-area-inset-bottom))}.nav button{width:25%;border:0;background:transparent;color:#9c9c9c;font-size:12px}.nav button.active{color:var(--gold)}.nav .icon{display:block;font-size:23px;margin-bottom:4px}.page{display:none}.page.active{display:block}.empty{text-align:center;color:#a5a5a5;padding:35px 10px;line-height:1.8}.footer{font-size:11px;color:#868686;line-height:1.8;padding:20px}.detailtitle{font-size:24px;color:var(--gold)}.smallbtn{border:0;background:#333;color:#eee;border-radius:6px;padding:6px 10px}.hint{font-size:12px;color:#a7a7a7;line-height:1.8}.chip{display:inline-block;padding:8px 11px;background:#303136;border-radius:20px;color:#e7e7e7;margin:4px;font-size:12px}a{color:var(--gold)}
-</style></head><body><main class="app"><header class="top"><div class="brand">薪资趋势<span>Pro</span></div><div class="pill">城市 · 岗位 · 趋势</div></header><input class="search" id="globalSearch" placeholder="搜索城市或岗位，如：合肥、招聘专员" aria-label="搜索城市或岗位"/><div class="page active" id="home"><div class="heading"><div class="eyebrow">全国就业与薪资观察</div><h1>薪资趋势 <span style="color:var(--gold)">总览</span></h1><div class="eyebrow">把薪资信息整理得更清楚</div></div><div class="notice">当前为可交互产品演示版。图表使用明确标注的模拟数据，不代表真实招聘薪资或市场涨跌。正式上线前需接入有授权的数据源。</div><div class="stats"><div class="stat"><div class="label">已收录演示城市</div><div class="number" id="cityCount">—</div><small>可查看城市详情</small></div><div class="stat"><div class="label">已收录演示岗位</div><div class="number" id="jobCount">—</div><small>可查询岗位参考区间</small></div><div class="stat"><div class="label">数据状态</div><div class="number" style="font-size:23px">演示</div><small>未接入真实数据</small></div><div class="stat"><div class="label">最近更新</div><div class="number" style="font-size:23px">待接入</div><small>生产数据接口</small></div></div><div class="section"><div class="sectionhead"><h2>薪资趋势示意</h2><span class="badge">模拟数据 · 不可用于决策</span></div><div class="chartbox"><div id="homeChart" class="chart"></div><div class="tabs" id="periodTabs"><button data-period="6" class="active">近6月</button><button data-period="12">近1年</button><button data-period="36">近3年</button></div></div></div><div class="section"><div class="sectionhead"><h2>城市薪资排行榜</h2><span class="badge">演示排序</span></div><div class="card" id="homeRanks"></div></div><div class="section"><div class="sectionhead"><h2>热门岗位</h2><span class="badge">点击查看详情</span></div><div class="card" id="homeJobs"></div></div></div><div class="page" id="cities"><div class="heading"><h1>城市<span style="color:var(--gold)">排行榜</span></h1><p class="hint">以下数据仅用于演示交互，非真实城市薪资统计。</p></div><div class="section"><div class="card" id="cityList"></div></div></div><div class="page" id="jobs"><div class="heading"><h1>岗位<span style="color:var(--gold)">查询</span></h1><p class="hint">选择岗位和城市，查看模拟薪资区间及变化图。</p></div><div class="section"><div class="controls"><select id="jobSelect" aria-label="选择岗位"></select><select id="citySelect" aria-label="选择城市"></select></div><div class="card" id="jobDetail"></div><div class="chartbox" style="margin-top:12px"><div id="jobChart" class="chart"></div></div></div></div><div class="page" id="mine"><div class="heading"><h1>我的<span style="color:var(--gold)">收藏</span></h1><p class="hint">收藏保存在当前浏览器中，清除浏览器数据后可能丢失。</p></div><div class="section"><div class="card" id="favorites"></div><h2>关于数据</h2><p class="hint">演示版中所有薪资数值、变化曲线和排行均为虚构样本，仅用于展示功能。真实版本应明确招聘薪资与实际到手工资的差别，公开采样时间、来源、样本量、去重方式和统计方法。</p><button class="cta" id="shareBtn">分享本页</button></div></div><div class="page" id="detail"><div class="section"><button class="smallbtn" id="backBtn">← 返回</button><h1 class="detailtitle" id="detailTitle"></h1><p class="hint">演示数据 · 非真实市场统计</p><div class="card" id="detailBody"></div><div class="chartbox" style="margin-top:12px"><div id="detailChart" class="chart"></div></div><div style="margin-top:14px"><button class="cta" id="favBtn">☆ 收藏</button> <button class="cta" id="detailShareBtn">分享</button></div></div></div><footer class="footer">薪资趋势Pro · V1.0 演示版<br/>仅供产品功能体验。所有演示数据均为模拟生成，禁止作为就业、薪酬或商业决策依据。<br/>正式发布前需完善数据授权、隐私政策、服务协议及合规审核。</footer></main><nav class="nav"><button class="active" data-page="home"><span class="icon">⌂</span>趋势</button><button data-page="cities"><span class="icon">▥</span>城市</button><button data-page="jobs"><span class="icon">⌕</span>岗位</button><button data-page="mine"><span class="icon">☆</span>我的</button></nav><script>
-const cities=[{name:'上海',v:14200},{name:'北京',v:13900},{name:'深圳',v:13500},{name:'杭州',v:11900},{name:'南京',v:10600},{name:'苏州',v:10100},{name:'合肥',v:8600},{name:'武汉',v:8400},{name:'成都',v:8200},{name:'西安',v:7800}];const jobs=[{name:'软件开发工程师',v:17500},{name:'电气工程师',v:11600},{name:'产品经理',v:16000},{name:'招聘专员',v:7800},{name:'猎头顾问',v:10500},{name:'无人机维修工程师',v:9500},{name:'财务专员',v:7200},{name:'运营专员',v:7600}];let currentDetail=null,previous='home',period=6;const $=s=>document.querySelector(s);const money=n=>'¥'+Math.round(n).toLocaleString('zh-CN');const favs=()=>JSON.parse(localStorage.getItem('salary-favs')||'[]');function setFavs(a){localStorage.setItem('salary-favs',JSON.stringify(a))}function toggleFav(type,name){let a=favs(),key=type+':'+name;a=a.includes(key)?a.filter(x=>x!==key):[...a,key];setFavs(a);renderFavorites();if(currentDetail)$('#favBtn').textContent=a.includes(currentDetail.type+':'+currentDetail.name)?'★ 已收藏':'☆ 收藏'}function row(o,i,type){return `<div class="row"><span class="rank">${i+1}</span><div class="rowmain"><strong>${o.name}</strong><small>模拟样本 · 点击查看趋势</small></div><div class="rowright"><strong>${money(o.v)}</strong><small>演示月薪指标</small></div><button class="smallbtn" data-open="${type}" data-name="${o.name}" aria-label="查看${o.name}">›</button></div>`}function renderLists(){$('#cityCount').textContent=cities.length;$('#jobCount').textContent=jobs.length;$('#homeRanks').innerHTML=cities.slice(0,6).map((o,i)=>row(o,i,'city')).join('');$('#cityList').innerHTML=cities.map((o,i)=>row(o,i,'city')).join('');$('#homeJobs').innerHTML=jobs.slice(0,5).map((o,i)=>row(o,i,'job')).join('');$('#jobSelect').innerHTML=jobs.map((x,i)=>`<option value="${i}">${x.name}</option>`).join('');$('#citySelect').innerHTML=cities.map((x,i)=>`<option value="${i}" ${x.name==='合肥'?'selected':''}>${x.name}</option>`).join('')}function series(base,n){return Array.from({length:n},(_,i)=>Math.round(base*(1+0.035*Math.sin(i*.68)-0.0009*(n-i))))}function chart(el,base,n){let dom=$(el);if(!dom||typeof echarts==='undefined'){if(dom)dom.innerHTML='<p class="hint">图表库未加载，请检查网络后刷新。</p>';return}let old=echarts.getInstanceByDom(dom);if(old)old.dispose();let ch=echarts.init(dom);ch.setOption({animationDuration:400,grid:{left:57,right:18,top:24,bottom:38},tooltip:{trigger:'axis',valueFormatter:v=>money(v)+'（模拟）'},xAxis:{type:'category',boundaryGap:false,data:Array.from({length:n},(_,i)=>'第'+(i+1)+'月'),axisLabel:{color:'#999',interval:Math.max(0,Math.floor(n/5)-1)},axisLine:{lineStyle:{color:'#444'}}},yAxis:{type:'value',scale:true,axisLabel:{color:'#999',formatter:v=>Math.round(v/1000)+'k'},splitLine:{lineStyle:{color:'#303236'}}},series:[{type:'line',smooth:true,symbol:'none',data:series(base,n),lineStyle:{color:'#e8d18d',width:3},areaStyle:{color:'rgba(232,209,141,.12)'}}]});window.addEventListener('resize',()=>ch.resize(),{passive:true});setTimeout(()=>ch.resize(),80)}function page(name){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===name));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===name));window.scrollTo(0,0);if(name==='home')chart('#homeChart',10000,period);if(name==='jobs')renderJob();if(name==='mine')renderFavorites()}function openDetail(type,name){previous=document.querySelector('.page.active').id;currentDetail={type,name};let o=(type==='city'?cities:jobs).find(x=>x.name===name);if(!o)return;page('detail');$('#detailTitle').textContent=name+' · 薪资趋势';$('#detailBody').innerHTML=`<div class="label">演示月薪指标</div><div class="number">${money(o.v)}</div><p class="hint">该数字是虚构样本，仅供查看页面效果。正式版将展示统计口径、样本量和数据时间。</p>`;$('#favBtn').textContent=favs().includes(type+':'+name)?'★ 已收藏':'☆ 收藏';chart('#detailChart',o.v,12)}function renderJob(){let j=jobs[+$('#jobSelect').value],c=cities[+$('#citySelect').value];if(!j||!c)return;let v=Math.round(j.v*c.v/10000);$('#jobDetail').innerHTML=`<div class="label">${c.name} · ${j.name}</div><div class="number">${money(v)}</div><div class="hint">模拟月薪指标（按演示公式生成，不是真实岗位报价）</div><p>演示区间：${money(v*.8)} – ${money(v*1.2)}</p><button class="cta" id="jobOpen">查看岗位详情</button>`;$('#jobOpen').onclick=()=>openDetail('job',j.name);chart('#jobChart',v,12)}function renderFavorites(){let a=favs();$('#favorites').innerHTML=a.length?a.map((x,i)=>{let [type,name]=x.split(':');return `<div class="row"><div class="rowmain"><strong>${name}</strong><small>${type==='city'?'城市':'岗位'}</small></div><button class="smallbtn" data-open="${type}" data-name="${name}">查看</button><button class="smallbtn" data-remove="${x}">删除</button></div>`}).join(''):'<div class="empty">还没有收藏内容<br/>在城市或岗位详情中点击收藏</div>'}async function share(){let data={title:'薪资趋势Pro · 城市与岗位趋势',url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);alert('链接已复制')}else prompt('复制此链接',location.href)}catch(e){if(e.name!=='AbortError')alert('分享失败，请手动复制地址')}}document.addEventListener('click',e=>{let b=e.target.closest('[data-open]');if(b)openDetail(b.dataset.open,b.dataset.name);let r=e.target.closest('[data-remove]');if(r){let [type,name]=r.dataset.remove.split(':');toggleFav(type,name)}});document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>page(b.dataset.page));document.querySelectorAll('#periodTabs button').forEach(b=>b.onclick=()=>{period=+b.dataset.period;document.querySelectorAll('#periodTabs button').forEach(x=>x.classList.toggle('active',x===b));chart('#homeChart',10000,period)});$('#jobSelect').onchange=renderJob;$('#citySelect').onchange=renderJob;$('#backBtn').onclick=()=>page(previous==='detail'?'home':previous);$('#favBtn').onclick=()=>currentDetail&&toggleFav(currentDetail.type,currentDetail.name);$('#shareBtn').onclick=share;$('#detailShareBtn').onclick=share;$('#globalSearch').addEventListener('input',e=>{let q=e.target.value.trim();if(!q)return;let c=cities.find(x=>x.name.includes(q)),j=jobs.find(x=>x.name.includes(q));if(c)openDetail('city',c.name);else if(j)openDetail('job',j.name)});renderLists();page('home');
-</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#111315"/>
+<title>薪资趋势Pro V2.0 · 城市与岗位薪资观察</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<main class="app">
+<header class="top">
+<div class="brand">薪资趋势<span>Pro</span>
+</div>
+<div class="pill">V2.0 · 模拟数据</div>
+</header>
+<input class="search" id="globalSearch" placeholder="搜索城市或岗位，如：合肥、招聘专员" aria-label="搜索城市或岗位"/>
+<div id="searchResults" class="section" hidden aria-live="polite">
+</div>
+<div class="page active" id="home">
+<div class="heading">
+<div class="eyebrow">全国就业与薪资观察</div>
+<h1>薪资趋势 <span style="color:var(--gold)">总览</span>
+</h1>
+<div class="eyebrow">把薪资信息整理得更清楚</div>
+</div>
+<div class="notice">当前为可交互产品演示版。图表使用明确标注的模拟数据，不代表真实招聘薪资或市场涨跌。正式上线前需接入有授权的数据源。</div>
+<div class="stats">
+<div class="stat">
+<div class="label">已收录演示城市</div>
+<div class="number" id="cityCount">—</div>
+<small>可查看城市详情</small>
+</div>
+<div class="stat">
+<div class="label">已收录演示岗位</div>
+<div class="number" id="jobCount">—</div>
+<small>可查询岗位参考区间</small>
+</div>
+<div class="stat">
+<div class="label">数据状态</div>
+<div class="number" style="font-size:23px">演示</div>
+<small>未接入真实数据</small>
+</div>
+<div class="stat">
+<div class="label">最近更新</div>
+<div class="number" style="font-size:23px">待接入</div>
+<small>生产数据接口</small>
+</div>
+</div>
+<div class="section">
+<div class="sectionhead">
+<h2>薪资趋势示意</h2>
+<span class="badge">模拟数据 · 不可用于决策</span>
+</div>
+<div class="chartbox">
+<div id="homeChart" class="chart">
+</div>
+<div class="tabs" id="periodTabs">
+<button data-period="6" class="active">近6月</button>
+<button data-period="12">近1年</button>
+<button data-period="36">近3年</button>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="sectionhead">
+<h2>城市薪资排行榜</h2>
+<span class="badge">演示排序</span>
+</div>
+<div class="card" id="homeRanks">
+</div>
+</div>
+<div class="section">
+<div class="controls" style="padding:0 18px">
+<button class="cta" data-page="compare">城市对比</button>
+<button class="cta" data-page="calculator">工资计算器</button>
+</div>
+<div class="sectionhead">
+<h2>热门岗位</h2>
+<span class="badge">点击查看详情</span>
+</div>
+<div class="card" id="homeJobs">
+</div>
+</div>
+</div>
+<div class="page" id="cities">
+<div class="heading">
+<h1>全国城市<span style="color:var(--gold)">排行榜</span>
+</h1>
+<p class="hint">以下数据仅用于演示交互，非真实城市薪资统计。</p>
+</div>
+<div class="section">
+<div class="controls">
+<input id="cityFilter" class="field" placeholder="筛选城市" aria-label="筛选城市">
+<select id="rankSort" aria-label="排行榜排序">
+<option value="desc">模拟月薪从高到低</option>
+<option value="asc">模拟月薪从低到高</option>
+</select>
+</div>
+<p id="rankCount" class="hint">
+</p>
+<div class="card" id="cityList">
+</div>
+</div>
+</div>
+<div class="page" id="jobs">
+<div class="heading">
+<h1>岗位<span style="color:var(--gold)">查询</span>
+</h1>
+<p class="hint">选择岗位和城市，查看模拟薪资区间及变化图。</p>
+</div>
+<div class="section">
+<div class="controls">
+<select id="jobSelect" aria-label="选择岗位">
+</select>
+<select id="citySelect" aria-label="选择城市">
+</select>
+</div>
+<div class="card" id="jobDetail">
+</div>
+<div class="chartbox" style="margin-top:12px">
+<div id="jobChart" class="chart">
+</div>
+</div>
+</div>
+</div>
+<div class="page" id="mine">
+<div class="heading">
+<h1>我的<span style="color:var(--gold)">收藏</span>
+</h1>
+<p class="hint">收藏保存在当前浏览器中，清除浏览器数据后可能丢失。</p>
+</div>
+<div class="section">
+<div class="card" id="favorites">
+</div>
+<h2>实用工具</h2>
+<div class="controls">
+<button class="cta" data-page="compare">城市对比</button>
+<button class="cta" data-page="calculator">工资计算器</button>
+</div>
+<h2>关于数据</h2>
+<p class="hint">演示版中所有薪资数值、变化曲线和排行均为虚构样本，仅用于展示功能。真实版本应明确招聘薪资与实际到手工资的差别，公开采样时间、来源、样本量、去重方式和统计方法。</p>
+<button class="cta" id="shareBtn">分享本页</button>
+</div>
+</div>
+<div class="page" id="compare">
+<div class="section">
+<h1>城市对比</h1>
+<p class="notice">全部为模拟数据 · 仅展示同一岗位在不同城市的演示差异。</p>
+<label>对比岗位<select class="field" id="compareJob">
+</select>
+</label>
+<div class="controls">
+<select id="compareA" aria-label="第一个城市">
+</select>
+<select id="compareB" aria-label="第二个城市">
+</select>
+</div>
+<div id="compareResult" class="card">
+</div>
+<div id="compareChart" class="chartbox">
+</div>
+<button class="cta" id="compareShare">分享对比</button>
+</div>
+</div>
+<div class="page" id="calculator">
+<div class="section">
+<h1>工资计算器</h1>
+<p class="notice">自定义扣除估算器 · 非真实个税或社保核算。默认比例和税额均为演示参数，不代表任何城市政策。</p>
+<form id="calcForm">
+<label>税前月薪（元）<input class="field" id="gross" type="number" min="0" max="100000000" step="0.01" value="10000" required>
+</label>
+<label>个人社保比例（%）<input class="field" id="social" type="number" min="0" max="100" step="0.01" value="10" required>
+</label>
+<label>个人公积金比例（%）<input class="field" id="fund" type="number" min="0" max="100" step="0.01" value="7" required>
+</label>
+<label>自定义预估税额（元/月）<input class="field" id="tax" type="number" min="0" step="0.01" value="0" required>
+</label>
+<button class="cta" type="submit">计算估算到手工资</button>
+</form>
+<div class="card" id="calcResult" aria-live="polite" style="margin-top:16px">
+</div>
+</div>
+</div>
+<div class="page" id="detail">
+<div class="section">
+<button class="smallbtn" id="backBtn">← 返回</button>
+<h1 class="detailtitle" id="detailTitle">
+</h1>
+<p class="hint">演示数据 · 非真实市场统计</p>
+<div class="card" id="detailBody">
+</div>
+<div class="chartbox" style="margin-top:12px">
+<div id="detailChart" class="chart">
+</div>
+</div>
+<div style="margin-top:14px">
+<button class="cta" id="favBtn">☆ 收藏</button> <button class="cta" id="detailShareBtn">分享</button>
+</div>
+</div>
+</div>
+<footer class="footer">薪资趋势Pro · V2.0 演示版<br/>仅供产品功能体验。所有演示数据均为模拟生成，禁止作为就业、薪酬或商业决策依据。<br/>正式发布前需完善数据授权、隐私政策、服务协议及合规审核。</footer>
+</main>
+<nav class="nav">
+<button class="active" data-page="home">
+<span class="icon">⌂</span>趋势</button>
+<button data-page="cities">
+<span class="icon">▥</span>城市</button>
+<button data-page="jobs">
+<span class="icon">⌕</span>岗位</button>
+<button data-page="mine">
+<span class="icon">☆</span>我的</button>
+</nav>
+<script src="./app.js" defer>
+</script>
+</body>
+</html>
