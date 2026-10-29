@@ -17,9 +17,11 @@ class VisibleText(HTMLParser):
 def audit(item):
     key,source=item
     try:
-        request=urllib.request.Request(source['url'],headers={'User-Agent':'SalaryTrendPro/2.1 (public statistical source verification)'})
+        request=urllib.request.Request(source['url'],headers={'User-Agent':'SalaryTrendPro/2.2 (public statistical source verification)'})
         with urllib.request.urlopen(request,timeout=20) as response:
-            raw=response.read();charset=response.headers.get_content_charset() or 'utf-8'
+            raw=response.read();content_type=response.headers.get_content_type();charset=response.headers.get_content_charset() or 'utf-8'
+        if content_type not in ('text/html','text/plain','application/xhtml+xml'):
+            return {'source':key,'url':source['url'],'status':'manual_review_required','sha256':hashlib.sha256(raw).hexdigest(),'note':'PDF或图片表需人工核对年度与地区列；不运行HTML数字检查。'}
         parser=VisibleText();parser.feed(raw.decode(charset,errors='replace'))
         compact=re.sub(r'\s+','',html.unescape(' '.join(parser.parts)))
         records=[r for r in dataset['records'] if r['source']==key]
